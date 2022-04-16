@@ -13,7 +13,14 @@ public class Player {
     Boolean active;
     Integer boardPosition;
     Boolean isJailed;
-    Integer turnsInJail;
+    Integer turnsLeftInJail;
+    Integer getOutOfJailFreeCards;
+
+    public void sendPlayerToJail() {
+        this.isJailed = true;
+        this.turnsLeftInJail = 3;
+        this.boardPosition = 10;
+    }
 
     public Integer getId() {
         return id;
@@ -63,12 +70,21 @@ public class Player {
         isJailed = jailed;
     }
 
-    public Integer getTurnsInJail() {
-        return turnsInJail;
+    public Integer getTurnsLeftInJail() {
+        return turnsLeftInJail;
     }
 
-    public void setTurnsInJail(Integer turnsInJail) {
-        this.turnsInJail = turnsInJail;
+    public void setTurnsLeftInJail(Integer turnsLeftInJail) {
+        this.turnsLeftInJail = turnsLeftInJail;
+    }
+
+
+    public Integer getGetOutOfJailFreeCards() {
+        return getOutOfJailFreeCards;
+    }
+
+    public void setGetOutOfJailFreeCards(Integer getOutOfJailFreeCards) {
+        this.getOutOfJailFreeCards = getOutOfJailFreeCards;
     }
 
     public Player() {
@@ -85,7 +101,8 @@ public class Player {
         this.boardPosition = 0;
         // Start out of jail
         this.isJailed = false;
-        this.turnsInJail = 0;
+        this.turnsLeftInJail = 0;
+        this.getOutOfJailFreeCards = 0;
     }
 
 }

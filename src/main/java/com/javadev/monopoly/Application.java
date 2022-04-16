@@ -1,5 +1,6 @@
 package com.javadev.monopoly;
 
+import com.javadev.monopoly.model.Player;
 import com.javadev.monopoly.repository.PlayerRepository;
 import com.javadev.monopoly.service.GameSetupService;
 import com.javadev.monopoly.service.InitialiseGameService;
@@ -18,14 +19,8 @@ public class Application {
     @Autowired
     InitialiseGameService initialiseGameService;
 
-    GameSetupService gameSetupService = new GameSetupService();
-    PreTurnService preTurnService = new PreTurnService();
-
     @Autowired
     PlayGameService playGameService;
-
-    @Autowired
-    PlayerRepository playerRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -37,37 +32,10 @@ public class Application {
         // TODO: Initial Game Options - Normal or Fast, how many players, and random/selected characters
         initialiseGameService.initialOptions();
 
+        Player winner = playGameService.playGame();
 
-        // TODO: Game Setup - Initialising players with money and character tokens
-//        gameSetup();
+        System.out.println(winner.getName() + " has won the game!");
 
-
-        // TODO: Game Phase 1 - Trading, Dealing and Managing Properties
-//        turnPhaseOne();
-        playGameService.playGame();
-
-
-
-        // TODO: Game Phase 2 - Rolling and Moving
-        turnPhaseTwo();
-
-    }
-
-
-
-
-    private void gameSetup() {
-        System.out.println("*********Starting Game Setup*********");
-    }
-
-    private void turnPhaseOne() {
-        System.out.println("Do you wish to conduct any business this turn?");
-        System.out.println("1) Yes");
-        System.out.println("2) No");
-    }
-
-    private void turnPhaseTwo() {
-        System.out.println("Hit Enter To Rollllllllll!");
     }
 
 }

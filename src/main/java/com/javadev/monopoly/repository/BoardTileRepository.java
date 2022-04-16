@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardTileRepository extends JpaRepository<BoardTile, Integer> {
+
+//    BoardTile getByB(Integer id);
+
 }

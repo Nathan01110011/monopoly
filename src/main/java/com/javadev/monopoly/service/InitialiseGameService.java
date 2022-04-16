@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,11 +28,14 @@ public class InitialiseGameService {
     @Autowired
     private BoardTileRepository boardTileRepository;
 
+    @Autowired
+    private InsertDataService insertDataService;
+
     public void initialOptions() {
         try {
-            insertInitialData();
+            insertDataService.insertInitialData();
         } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
         System.out.println("*********************************************");
         System.out.println("***  How many players are playing today?  ***");
@@ -104,51 +108,5 @@ public class InitialiseGameService {
         // TODO: Persist Game Type In DB
     }
 
-
-    private void insertInitialData() {
-
-        // Adding Tile Info
-        List<BoardTile> tileList = readBoardTilesFromCSV("tile_info.csv");
-        boardTileRepository.saveAll(tileList);
-
-        // TODO: Add Property and Other Items to DB
-
-    }
-
-    // Adapted from https://www.java67.com/2015/08/how-to-load-data-from-csv-file-in-java.html
-    private static List<BoardTile> readBoardTilesFromCSV(String fileName) {
-        List<BoardTile> boardTiles = new ArrayList<>();
-//        Path pathToFile = Paths.get(fileName);
-        Path pathToFile = null;
-        try {
-            pathToFile = Paths.get(InitialiseGameService.class.getResource("/"+fileName).toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
-
-            String line = br.readLine();
-            while (line != null) {
-
-                String[] attributes = line.split(",");
-                BoardTile book = createBoardTile(attributes);
-                boardTiles.add(book);
-                // read next line before looping
-                // if end of file reached, line would be null
-                line = br.readLine();
-            }
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return boardTiles;
-    }
-
-    private static BoardTile createBoardTile(String[] metadata) {
-        int boardTileId = Integer.parseInt(metadata[0]);
-        int boardTileTypeId = Integer.parseInt(metadata[1]);
-
-        return new BoardTile(boardTileId, boardTileTypeId);
-    }
 
 }

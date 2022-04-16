@@ -17,37 +17,28 @@ public class BoardTile {
     5 - Community Chest
     6 - Jail
     7 - Go to Jail
-    7 - Fine/Tax
-    8 - Free Parking
+    8 - Fine/Tax
+    9 - Free Parking
     ownerId only relevant for purchasable tiles, to track ownership
      */
 
     @Id
-    Integer boardTileId;
-    Integer boardTileTypeId;
-    Integer ownerId;
+    Integer id;
+    Integer typeId;
 
     public BoardTile() {
     }
 
     public BoardTile(Integer boardTileId, Integer boardTileTypeId) {
-        this.boardTileId = boardTileId;
-        this.boardTileTypeId = boardTileTypeId;
+        this.id = boardTileId;
+        this.typeId = boardTileTypeId;
     }
 
-    public Integer getBoardTileId() {
-        return boardTileId;
+    public Integer getId() {
+        return id;
     }
 
-    public Integer getBoardTileTypeId() {
-        return boardTileTypeId;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public Integer getTypeId() {
+        return typeId;
     }
 }
