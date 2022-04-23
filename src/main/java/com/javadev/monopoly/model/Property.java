@@ -3,6 +3,7 @@ package com.javadev.monopoly.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+// TODO: This should be completely redone as inheriting from a BoardTile class
 @Entity
 public class Property {
 
