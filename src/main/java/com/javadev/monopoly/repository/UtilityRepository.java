@@ -1,12 +1,11 @@
 package com.javadev.monopoly.repository;
 
-import com.javadev.monopoly.model.BoardTile;
+import com.javadev.monopoly.model.Rail;
+import com.javadev.monopoly.model.Utility;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BoardTileRepository extends JpaRepository<BoardTile, Integer> {
-
-//    BoardTile getByB(Integer id);
+public interface UtilityRepository extends JpaRepository<Utility, Integer> {
 
 }

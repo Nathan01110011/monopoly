@@ -1,6 +1,7 @@
 package com.javadev.monopoly.service;
 
 import com.javadev.monopoly.model.Player;
+import com.javadev.monopoly.repository.BoardTileRepository;
 import com.javadev.monopoly.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class PlayGameService {
 
     @Autowired
     PlayerRepository playerRepository;
+
+    @Autowired
+    BoardTileRepository boardTileRepository;
 
     @Autowired
     ResolveLandOnTileService resolveLandOnTileService;
@@ -82,11 +86,8 @@ public class PlayGameService {
         do {
             doubleDiceRoll = false;
 
-//            int dieOne = (int) (Math.random() * 1000 % 6 + 1);
-//            int dieTwo = (int) (Math.random() * 1000 % 6 + 1);
-
-            int dieOne = 3;
-            int dieTwo = 3;
+            int dieOne = (int) (Math.random() * 1000 % 6 + 1);
+            int dieTwo = (int) (Math.random() * 1000 % 6 + 1);
 
             if (player.getJailed()) {
                 if (inJail(player, dieOne, dieTwo)){
@@ -94,7 +95,9 @@ public class PlayGameService {
                     return;
                 }
             } else {
-                System.out.println("You are currently on " + player.getBoardPosition());
+                String currentPosition = boardTileRepository.findById(player.getBoardPosition()).get().getName();
+//                System.out.println("You are currently on " + player.getBoardPosition());
+                System.out.println("You are currently on " + currentPosition);
                 System.out.println("Hit ENTER to roll!");
                 Scanner scanner = new Scanner(System.in);
                 scanner.nextLine();
@@ -138,7 +141,7 @@ public class PlayGameService {
             player.setBoardPosition(newPosition);
             System.out.println("New Position is " + newPosition);
             playerRepository.save(player);
-            landingOnTileActions(player, diceRoll);
+            resolveLandOnTileService.resolveLandingOnTile(player, diceRoll);
         } while (doubleDiceRoll);
 
     }
@@ -185,9 +188,5 @@ public class PlayGameService {
                 }
             }
         return true;
-    }
-
-    private void landingOnTileActions(Player player, Integer diceRoll) {
-        resolveLandOnTileService.resolveLandingOnTile(player, diceRoll);
     }
 }

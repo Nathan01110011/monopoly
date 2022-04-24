@@ -1,16 +1,16 @@
 package com.javadev.monopoly.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 // TODO: This should be completely redone as inheriting from a BoardTile class
 @Entity
-public class Property {
+public class Property extends BoardTile {
 
     // Foreign key, doubles as board id number
-    @Id
-    Integer id;
-    String name;
+//    @Id
+//    Integer id;
+//    Integer typeId;
+
     Integer price;
     String colourGroup;
     Integer ownerId;
@@ -31,8 +31,9 @@ public class Property {
     public Property() {
     }
 
-    public Property(Integer id, String name, Integer price, String colourGroup, Integer baseRent, Integer oneHouseRent, Integer twoHousesRent, Integer threeHousesRent, Integer fourHousesRent, Integer hotelRent) {
+    public Property(Integer id, int typeId, String name, Integer price, String colourGroup, Integer baseRent, Integer oneHouseRent, Integer twoHousesRent, Integer threeHousesRent, Integer fourHousesRent, Integer hotelRent) {
         this.id = id;
+        this.typeId = typeId;
         this.name = name;
         this.price = price;
         this.colourGroup = colourGroup;
@@ -46,13 +47,9 @@ public class Property {
         this.hotelRent = hotelRent;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
 
     public Integer getPrice() {
         return price;

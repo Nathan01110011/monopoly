@@ -32,11 +32,7 @@ public class InitialiseGameService {
     private InsertDataService insertDataService;
 
     public void initialOptions() {
-        try {
-            insertDataService.insertInitialData();
-        } catch (Exception e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
+        insertDataService.insertInitialData();
         System.out.println("*********************************************");
         System.out.println("***  How many players are playing today?  ***");
         System.out.println("*********************************************\n");

@@ -28,12 +28,13 @@ public class ResolveLandOnTileService {
 
 
     public void resolveLandingOnTile(Player currentPlayer, Integer diceRoll){
-        BoardTile boardTile = boardTileRepository.findById(currentPlayer.getBoardPosition()).get();
-        System.out.println("Landed on " + boardTile.getId() + " which is type " + boardTile.getTypeId());
 
+        BoardTile boardTile = boardTileRepository.findById(currentPlayer.getBoardPosition()).get();
+//        System.out.println("Landed on " + boardTile.getId() + " which is type " + boardTile.getTypeId());
+        System.out.println(currentPlayer.getName() + " has landed on " + boardTile.getName());
         switch(boardTile.getTypeId()) {
             case 0:
-                System.out.println(currentPlayer.getName() + " has landed on GO!");
+
                 break;
             case 1:
                 // 1 = Property
@@ -81,7 +82,7 @@ public class ResolveLandOnTileService {
     private void resolveLandingOnPropertyTile(Player player) {
         List<Property> propertyList = propertyRepository.findAll();
         Property property = propertyRepository.findById(player.getBoardPosition()).get();
-        System.out.println(player.getName() + " has landed on " + property.getName());
+//        System.out.println(player.getName() + " has landed on " + property.getName());
 
         if (property.getOwnerId() == null) {
             buyProperty(player, property);
@@ -112,7 +113,7 @@ public class ResolveLandOnTileService {
 
     private void resolveLandingOnCardTile(Player player, String cardType) {
 
-        System.out.println(player.getName() + " has landed on a " + cardType + " tile. Drawing Card!");
+        System.out.println("Drawing Card!");
         // TODO: Draw card logic
 
     }

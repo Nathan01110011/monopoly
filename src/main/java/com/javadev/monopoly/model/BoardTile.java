@@ -2,8 +2,11 @@ package com.javadev.monopoly.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BoardTile {
 
     /*
@@ -25,13 +28,15 @@ public class BoardTile {
     @Id
     Integer id;
     Integer typeId;
+    String name;
 
     public BoardTile() {
     }
 
-    public BoardTile(Integer boardTileId, Integer boardTileTypeId) {
+    public BoardTile(Integer boardTileId, Integer boardTileTypeId, String name) {
         this.id = boardTileId;
         this.typeId = boardTileTypeId;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -40,5 +45,9 @@ public class BoardTile {
 
     public Integer getTypeId() {
         return typeId;
+    }
+
+    public String getName() {
+        return name;
     }
 }
